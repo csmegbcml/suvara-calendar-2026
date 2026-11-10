@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to use · My Journey To Bethlehem 2026 - Suvara Calendar</title>
+<style>
+/* ---------- shared ---------- */
+:root{--h-main:clamp(20px,4.6vw,40px);--h-sub:clamp(11.5px,2vw,17px);--f-main:clamp(16px,2.6vw,21px);--f-sub:clamp(11.5px,1.6vw,13px);--navy:#2a3187;--red:#ed1a24;--yellow:#fcf300;--gold:#fcf300;--green:#1f7a45;--cream:#fffbea;--ink:#2a3187}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--cream);min-height:100vh}
+.serif{font-family:Georgia,'Times New Roman',serif}
+button{font-family:inherit}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 18px;position:relative;z-index:2}
+.brand{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;line-height:1.3}
+.brand .x{font-size:28px;line-height:1}
+.brandwrap{display:flex;align-items:center;gap:10px;min-width:0}
+.logo{height:46px;width:auto;max-width:90px;object-fit:contain;display:block}
+@media(max-width:520px){.topbar{padding:8px 12px}.logo{height:36px;max-width:64px}.brand{font-size:9.5px;gap:6px}.brand small{font-size:9.5px}.brand .x{font-size:20px}}
+.brand small{display:block;font-weight:400;text-transform:none;letter-spacing:0;font-size:11px;opacity:.85}
+.switch{border:1.5px solid currentColor;background:transparent;color:inherit;border-radius:20px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.btn{display:inline-block;border:0;border-radius:26px;padding:12px 22px;font-weight:700;font-size:15px;cursor:pointer;text-decoration:none;background:var(--red);color:#fff;transition:transform .15s,filter .15s}
+.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn.gold{background:var(--yellow);color:var(--navy);box-shadow:inset 0 0 0 1.5px #e3d800}.btn.ghost{background:transparent;color:var(--red);border:2px solid var(--red)}
+main{max-width:1060px;margin:auto;padding:22px 16px 50px}
+.hidden{display:none!important}
+
+/* progress + message */
+.progress{background:#fff;border-radius:18px;padding:16px 18px;box-shadow:0 4px 16px #2a318714;margin:0 0 20px}
+.progress .row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.progress h3{margin:0;font-size:18px}
+.bar{height:14px;background:#eee3c9;border-radius:10px;overflow:hidden;margin:10px 0 12px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),#f3c969);border-radius:10px;transition:width .6s}
+.phrase{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1.5px dashed #c9b98f;border-radius:8px;padding:5px 8px;font-size:12px;min-width:44px;text-align:center;color:#9a8c6a;background:#fffdf7;cursor:pointer}
+.chip.got{border-style:solid;border-color:var(--gold);color:var(--red);font-weight:700;background:#fdf3d7;text-transform:uppercase}
+.chip small{display:block;font-size:9px;color:#8a8a8a;font-weight:400;text-transform:none}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 14px}
+.steps a,.steps div{display:flex;align-items:center;gap:8px;background:#fff;border-radius:12px;padding:9px 10px;font-size:13px;line-height:1.25;box-shadow:0 2px 8px #2a318710;color:inherit;text-decoration:none}
+.steps b{flex:none;width:24px;height:24px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-size:13px}
+@media(max-width:620px){.steps{gap:5px}.steps a,.steps div{flex-direction:column;text-align:center;gap:4px;padding:7px 4px;font-size:11.5px}.steps b{width:22px;height:22px;font-size:12px}}
+.trk{margin-top:26px}.trk .btn.sm{padding:6px 12px;font-size:12.5px;margin:4px 0 2px;vertical-align:middle}
+.trk ol{margin:10px 0 0;padding-left:20px;font-size:14px;line-height:1.6}.trk ol li{margin-bottom:4px}
+.center{text-align:center}
+
+/* grid + door animation */
+.days{display:grid;gap:10px;perspective:900px}
+.day{position:relative;border:0;border-radius:14px;cursor:pointer;color:#fff;padding:10px 6px;min-height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:transform .2s;transform-style:preserve-3d}
+.day:hover,.day:focus-visible{transform:translateY(-3px) scale(1.03);outline:0}
+.day.opening{animation:door .45s ease-in forwards}
+@keyframes door{to{transform:rotateY(-80deg);opacity:.2}}
+.day .n{font-weight:700;font-size:22px;line-height:1}
+.day .md{display:flex;align-items:baseline;gap:4px;line-height:1}.day .mo,.day .wd{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;opacity:.85;line-height:1}
+.month{display:flex;align-items:baseline;justify-content:space-between;margin:0 2px 8px}.month h2{margin:0;font-family:Georgia,serif;font-size:22px;color:var(--navy)}.month span{font-size:12px;color:#6a7280}.day .ic{font-size:26px;line-height:1}
+.day .done{position:absolute;top:6px;right:7px;background:#fff;color:var(--green);width:22px;height:22px;border-radius:50%;font-size:13px;font-weight:700;display:grid;place-items:center;box-shadow:0 1px 4px #0004}
+.day.locked{filter:grayscale(.9);opacity:.6}
+
+/* modal */
+.modal{display:none;position:fixed;inset:0;background:#07152cc4;z-index:20;padding:16px;overflow:auto}
+.modal.show{display:flex;align-items:flex-start;justify-content:center}
+.panel{background:#fffaf0;width:min(660px,100%);border-radius:20px;overflow:hidden;box-shadow:0 14px 50px #0007;margin:auto 0;animation:pop .3s ease-out}
+@keyframes pop{from{transform:scale(.92);opacity:0}}
+.phead{padding:18px 22px;color:#fff;position:relative}
+.phead small{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:.9}
+.phead h2{margin:6px 0 0;font-size:27px;font-family:Georgia,serif}
+.close{position:absolute;right:14px;top:14px;border:0;background:#ffffff2e;color:#fff;font-size:22px;border-radius:50%;width:36px;height:36px;cursor:pointer}
+.pbody{padding:18px 22px 22px;font-size:15.5px;line-height:1.6}
+.kind{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:4px 10px;border-radius:12px;background:var(--navy);color:var(--yellow)}
+.verse{background:#fffbd6;border-left:4px solid var(--red);padding:10px 14px;margin:12px 0;border-radius:0 8px 8px 0}
+.prayer{background:#fff;border:1px solid #e6dcc6;border-radius:12px;padding:12px 15px;font-family:Georgia,serif;font-size:16.5px;margin:12px 0}
+.video{position:relative;padding-top:56.25%;border-radius:14px;overflow:hidden;background:#000;margin:12px 0 4px}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vlink{font-size:12px;color:#5a6471}.vlink a{color:var(--red)}
+.ask{background:#eef4fb;border-radius:12px;padding:10px 14px;margin:12px 0;font-size:14.5px}
+.challenge{margin-top:16px;border-top:2px dashed #e0cfa6;padding-top:16px}
+.challenge h3{margin:0 0 8px;font-size:17px;color:var(--navy)}
+.opts{display:grid;gap:8px;margin:8px 0}
+.opt{text-align:left;border:2px solid #e2d6b8;background:#fff;border-radius:12px;padding:11px 14px;font-size:15px;cursor:pointer;transition:border .15s,background .15s}
+.opt:hover{border-color:var(--gold)}.opt:disabled{color:inherit;cursor:default}
+.opt.wrong{border-color:#d9534f;background:#fdecec;animation:shake .35s}
+.opt.right{border-color:var(--green);background:#e8f5ee}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.fb{font-size:13.5px;min-height:20px;margin:4px 0 0}
+.journal{width:100%;min-height:80px;border:1.5px solid #d9cba8;border-radius:10px;padding:10px;font:14px/1.5 Arial,sans-serif;resize:vertical;background:#fff}
+.note{font-size:12px;color:#6a7280}
+.word{display:none;margin-top:14px;text-align:center;background:linear-gradient(135deg,#fffde0,#fff7a3);border:2px dashed var(--red);border-radius:16px;padding:16px;animation:pop .35s ease-out}
+.word.show{display:block}
+.word .w{display:block;font:700 40px Georgia,serif;color:var(--red);letter-spacing:2px;text-transform:uppercase;margin:4px 0}
+.pfoot{padding:0 22px 22px;text-align:center}
+
+/* confetti */
+.cf{position:fixed;top:-12px;width:9px;height:14px;z-index:40;pointer-events:none;border-radius:2px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg)}}
+@media(prefers-reduced-motion:reduce){.cf,.day.opening{animation:none!important}}
+
+/* chooser */
+.chooser{position:fixed;inset:0;z-index:30;background:linear-gradient(180deg,#fffbea,#fff3b8);color:var(--ink);display:flex;align-items:center;justify-content:center;padding:20px 16px;overflow:auto}
+.chooser .in{max-width:720px;width:100%;text-align:center;margin:auto}
+.chooser .logos{display:flex;justify-content:center;align-items:center;gap:22px;margin-bottom:14px}
+.chooser .logos img{height:110px;width:110px;object-fit:contain}
+.chooser .org{font-family:Georgia,serif;font-size:var(--h-main);font-weight:700;line-height:1.15;color:var(--navy)}
+.chooser .org2{font-size:var(--h-sub);color:#4a4f8a;margin-top:4px}
+.chooser h1{font-family:Georgia,serif;color:var(--red);font-size:var(--h-main);line-height:1.15;margin:10px 0 4px}
+.chooser .rule{width:70px;height:5px;border-radius:3px;background:var(--red);box-shadow:0 0 0 1px #e3d800;margin:10px auto 18px}
+.chooser .choose{font-size:17px;font-weight:700;color:var(--navy);margin:0 0 14px}
+.chooser .disc{margin:22px auto 0;max-width:560px;font-size:13px;line-height:1.6;color:#4a4f8a;border-top:1px solid #dcc9a0;padding-top:14px}
+.chooser .disc p{margin:0 0 6px}
+@media(max-width:520px){.chooser .logos img{height:80px;width:80px}.chooser .choose{font-size:15px}}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{border:0;border-radius:20px;padding:22px 18px;cursor:pointer;text-align:center;transition:transform .2s;color:var(--ink)}
+.card:hover{transform:translateY(-4px)}
+.card .big{font-size:40px;line-height:1.1}.card h2{margin:6px 0 4px;font-size:24px}.card span{font-size:15px;font-weight:700}
+@media(max-width:520px){.cards{gap:10px}.card{padding:16px 8px;border-radius:16px}.card .big{font-size:32px}.card h2{font-size:20px}.card span{font-size:13px}}
+.card.j{background:linear-gradient(160deg,#ff3b44,var(--red));color:#fff;box-shadow:0 6px 18px #ed1a2444,inset 0 -5px 0 #0002}.card.j span{color:var(--yellow)}
+.card.y{background:linear-gradient(160deg,#3a43a5,var(--navy));color:#fff;box-shadow:0 6px 18px #2a318744,inset 0 -5px 0 #0002}.card.y span{color:var(--yellow)}
+.card.y h2{font-family:Georgia,serif}
+
+/* ---------- JUNIORS theme (9–12) ---------- */
+body.junior{background:var(--cream)}
+.junior .days{grid-template-columns:repeat(4,1fr)}
+@media(min-width:620px){.junior .days{grid-template-columns:repeat(6,1fr)}}
+.junior .day{border-radius:14px;box-shadow:0 4px 0 #0003,inset 0 0 0 3px #ffffff40}
+.junior .day:nth-child(4n+1){background:var(--red)}.junior .day:nth-child(4n+2){background:var(--navy)}.junior .day:nth-child(4n+3){background:var(--yellow);color:var(--navy)}.junior .day:nth-child(4n){background:var(--green)}
+.junior .progress h3{color:var(--navy)}
+.junior .phead{background:linear-gradient(135deg,var(--red),#b30f17)}
+.junior .phead h2{font-family:'Arial Black',Arial,sans-serif;font-size:24px}
+
+/* ---------- SENIORS theme (13–16) ---------- */
+body.youth{background:var(--cream)}
+.hero{background:linear-gradient(180deg,#fffbea,#fff3b8);border-bottom:7px solid;border-image:repeating-linear-gradient(45deg,var(--red) 0 10px,#fff 10px 20px) 7}
+.lights{height:26px;background:
+ radial-gradient(ellipse 5px 7px at 12px 17px,var(--red) 96%,transparent) 0 0/96px 26px repeat-x,
+ radial-gradient(ellipse 5px 7px at 36px 19px,var(--yellow) 96%,transparent) 0 0/96px 26px repeat-x,
+ radial-gradient(ellipse 5px 7px at 60px 17px,var(--green) 96%,transparent) 0 0/96px 26px repeat-x,
+ radial-gradient(ellipse 5px 7px at 84px 19px,#5b8cff 96%,transparent) 0 0/96px 26px repeat-x,
+ linear-gradient(#6b5a3a,#6b5a3a) 0 8px/100% 2px no-repeat;filter:drop-shadow(0 0 3px #fff8)}
+.chooser .lights{position:fixed;left:0;right:0;top:0}
+.heroin{max-width:1060px;margin:auto;padding:16px 20px 16px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:16px}
+.hero .org{font-family:Georgia,serif;font-size:var(--h-main);font-weight:700;line-height:1.15;color:var(--navy)}
+.hero .org2{font-size:var(--h-sub);color:#4a4f8a;margin-top:4px}
+.hero h1{font-family:Georgia,serif;margin:8px 0 2px;line-height:1.15;font-size:var(--h-main);color:var(--navy)}
+.hero h1 .a{color:var(--red)}
+.hero .sub{color:var(--navy);font-family:Georgia,serif;font-size:17px;margin:2px 0}
+.hero .rule{width:70px;height:5px;border-radius:3px;background:var(--red);box-shadow:0 0 0 1px #e3d800;margin:8px 0}
+.hero .meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:#3b4457}
+.hero .today{font-weight:700;color:var(--navy)}
+.hero .switch{display:inline-block;color:var(--navy);font-size:11px;padding:5px 10px}
+.hlogo{position:relative;width:150px;height:150px}
+.hlogo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .6s}
+.hlogo img.on{opacity:1}
+@media(max-width:620px){.heroin{padding:12px 14px;gap:10px}.hlogo{width:78px;height:78px}.hero .sub{font-size:14px}.hero .meta{font-size:12px;gap:6px}}
+.youth .days{grid-template-columns:repeat(4,1fr)}
+@media(min-width:620px){.youth .days{grid-template-columns:repeat(6,1fr)}}
+.youth .day{background:#fffdf7;color:var(--navy);border:1.5px solid #dcc9a0;box-shadow:0 3px 10px #2a318712}
+.youth .day .n{font-family:Georgia,serif;font-size:26px;color:var(--red)}
+.youth .day:nth-child(4n+2) .n{color:var(--navy)}.youth .day:nth-child(4n+3) .n{color:var(--green)}.youth .day:nth-child(4n) .n{color:var(--navy)}
+.youth .day{border-top:5px solid var(--yellow)}.youth .day:nth-child(even){border-top-color:var(--red)}
+.youth .day .ic{font-size:20px;filter:saturate(.7)}
+.youth .progress h3{font-family:Georgia,serif;color:var(--navy)}
+.youth .phead{background:linear-gradient(135deg,var(--navy),#1b2070)}
+
+footer .fhead{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;max-width:760px;margin:0 auto 10px}
+footer .flogo{height:90px;width:90px;object-fit:contain}
+footer .fcol{display:flex;flex-direction:column;gap:6px}
+footer .ftitle{font-family:Georgia,serif;font-size:var(--f-main);font-weight:700;line-height:1.2}
+footer .forg{font-family:Georgia,serif;font-size:var(--f-main);font-weight:700;line-height:1.2;color:var(--yellow)}
+footer .forg small{display:block;font-family:Arial,Helvetica,sans-serif;font-size:var(--f-sub);font-weight:400;color:#e9ecf3;margin-top:4px}
+@media(max-width:520px){footer .flogo{height:58px;width:58px}footer .fhead{gap:8px}footer .fcol{font-size:12px}}
+footer .fnote{max-width:640px;margin:12px auto 0;padding-top:12px;border-top:1px solid #ffffff2e;font-size:12px;color:#d6deea;line-height:1.6}
+footer{text-align:center;background:var(--navy);color:#fff;padding:22px 14px;font-size:13px;line-height:1.7}footer a{color:var(--yellow)}
+footer{border-top:7px solid;border-image:repeating-linear-gradient(45deg,var(--red) 0 10px,#fff 10px 20px) 7}
+</style>
+<style>
+.hero .back{display:inline-block;margin-top:4px}
+.intro{font-size:16px;line-height:1.55;margin:4px 0 18px}
+.box{background:#fff;border-radius:16px;padding:18px 20px;box-shadow:0 4px 16px #2a318714;margin:0 0 18px}
+.box h2{font-family:Georgia,serif;color:var(--navy);margin:0 0 10px;font-size:24px}
+.box ol{margin:0;padding-left:0;list-style:none;counter-reset:s}
+.box ol li{counter-increment:s;position:relative;padding:8px 0 8px 42px;font-size:16px;line-height:1.5;border-top:1px dashed #efe6b8}
+.box ol li:first-child{border-top:0}
+.box ol li:before{content:counter(s);position:absolute;left:0;top:7px;width:28px;height:28px;border-radius:50%;background:var(--red);color:#fff;font-weight:700;display:grid;place-items:center;font-size:14px}
+.box.teach ol li:before{background:var(--navy)}
+.box .tip{margin:12px 0 0;font-size:14px;color:#4a4f8a}
+.gallery h2{font-family:Georgia,serif;color:var(--navy);font-size:24px;margin:8px 0 4px}
+.gallery>p{margin:0 0 14px;color:#4a4f8a;font-size:14px}
+.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.shot{background:#fff;border-radius:16px;padding:10px;box-shadow:0 4px 16px #2a318714;margin:0}
+.shot a{display:block;border-radius:10px;overflow:hidden;border:1px solid #e6e2c8;background:#f3f3f3}
+.shot img{display:block;width:100%;height:340px;object-fit:cover;object-position:top}
+.shot figcaption{font-size:14px;line-height:1.4;padding:10px 4px 2px}
+.shot figcaption b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--red);color:#fff;font-size:13px;margin-right:6px}
+@media(min-width:1000px){.shots{grid-template-columns:repeat(5,1fr)}.shot img{height:300px}}
+@media(max-width:520px){.shots{grid-template-columns:1fr 1fr;gap:10px}.shot{padding:6px}.shot img{height:240px}.shot figcaption{font-size:12.5px}}
+.cta{text-align:center;margin:24px 0 6px}
+.guide h2{font-family:Georgia,serif;color:var(--navy);font-size:24px;margin:0 0 10px}
+.stage{background:#fff;border-radius:20px;box-shadow:0 8px 25px #2a318718;overflow:hidden}
+.stagehead{background:var(--navy);color:#fff;padding:12px 18px;display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:15px}
+.stagehead span{font-size:13px;color:var(--yellow)}
+.scene{display:grid;grid-template-columns:1fr 280px;gap:22px;align-items:center;padding:22px;min-height:560px;animation:sIn .45s ease-out}
+@keyframes sIn{from{opacity:0;transform:translateX(24px)}}
+.scene.back{animation-name:sBack}@keyframes sBack{from{opacity:0;transform:translateX(-24px)}}
+.stxt .art{font-size:54px;animation:float 2s ease-in-out infinite;display:inline-block}
+@keyframes float{50%{transform:translateY(-7px)}}
+.stxt h3{font-family:Georgia,serif;color:var(--red);font-size:26px;margin:6px 0 8px}
+.stxt p{font-size:16.5px;line-height:1.55;margin:0 0 10px}
+.phone{position:relative;border:8px solid #23284a;border-radius:30px;overflow:hidden;background:#fff;box-shadow:0 8px 20px #0003;width:260px;margin:auto}
+.phone.paper{border:2px solid #d8c89e;border-radius:6px;width:270px;box-shadow:5px 6px 0 #e6dcb8}
+.phone img{display:block;width:100%;height:auto}
+.finger{position:absolute;font-size:34px;transform:translate(-20%,-10%);animation:tap 1.4s ease-in-out infinite;filter:drop-shadow(0 2px 3px #0005);pointer-events:none}
+.finger:before{content:'';position:absolute;left:-14px;top:-14px;width:30px;height:30px;border-radius:50%;border:3px solid var(--red);animation:ring 1.4s ease-out infinite}
+@keyframes tap{0%,100%{transform:translate(-20%,-10%)}45%{transform:translate(-20%,-10%) scale(.85)}}
+@keyframes ring{0%{opacity:0;transform:scale(.4)}40%{opacity:1}100%{opacity:0;transform:scale(1.6)}}
+.mock{background:#fffdf6;border:2px solid #d8c89e;border-radius:8px;padding:16px;width:270px;margin:auto;box-shadow:5px 6px 0 #e6dcb8;text-align:left;font-size:14px}
+.mock h4{margin:0 0 8px;color:var(--red);font-family:Georgia,serif;font-size:17px}
+.mock .q{background:#fff3b0;border-radius:8px;padding:9px;margin:8px 0}
+.mock .ln{border-bottom:1px dotted #a9a27f;height:22px}
+.gdots{display:flex;gap:8px;justify-content:center;margin:14px 0 4px}
+.gdots button{width:11px;height:11px;border-radius:50%;border:0;padding:0;background:#d6d1c3;cursor:pointer}
+.gdots button.on{background:var(--red);transform:scale(1.3)}
+.gctl{display:flex;justify-content:center;gap:12px;margin:10px 0 4px}
+.gctl .btn:disabled{opacity:.35}
+@media(max-width:700px){.scene{grid-template-columns:1fr;padding:16px;gap:14px;min-height:0;text-align:center}.stxt .art{font-size:40px}.stxt h3{font-size:22px}.stxt p{font-size:15px}.phone{width:220px}.phone.paper,.mock{width:250px}}
+@media(prefers-reduced-motion:reduce){.scene,.finger,.finger:before,.stxt .art{animation:none}}
+</style>
+</head>
+<body class="junior">
+<div class="lights" aria-hidden="true" style="background-color:#fffbea"></div>
+<header class="hero"><div class="heroin"><div>
+ <div class="org">Cherupushpa Mission League</div>
+ <div class="org2">Catholic Syro Malabar Eparchy of Great Britain</div>
+ <h1><span class="a">My Journey To Bethlehem</span> 2026</h1>
+ <div class="sub">How to use the Suvara Calendar 2026</div><div class="rule"></div>
+ <div class="meta"><a class="switch back" href="index.html" style="text-decoration:none">← Open the calendar</a></div>
+</div><div class="hlogo" id="hlogo"><img src="left.png" alt="" class="on" onerror="logoFail(this)"><img src="right.png" alt="" onerror="logoFail(this)"></div></div></header>
+
+<main>
+ <section class="guide" id="guide">
+  <h2>See it step by step</h2>
+  <div class="stage">
+   <div class="stagehead"><b id="gName"></b><span id="gCount"></span></div>
+   <div class="scene" id="gScene"></div>
+  </div>
+  <div class="gdots" id="gDots"></div>
+  <div class="gctl"><button class="btn ghost" id="gPrev">← Back</button><button class="btn" id="gNext">Next step →</button></div>
+  <p class="note center">Swipe, tap the dots, or use the buttons.</p>
+ </section>
+
+ <h2 style="font-family:Georgia,serif;color:var(--navy);font-size:24px;margin:30px 0 6px">Written steps</h2>
+ <p class="intro">A short Advent activity for children, every day from 1 to 24 December. You need this website and a notebook or the printed tracker sheet.</p>
+
+ <section class="box">
+  <h2>For parents</h2>
+  <ol>
+   <li>Each day, open the website and choose <b>Juniors</b> (Year 5–7) or <b>Seniors</b> (Year 8 and above).</li>
+   <li>Tap today’s date and do the activity together.</li>
+   <li>Write down the <b>secret word or words</b> for that day.</li>
+   <li>On 24 December, do the final task: make sentences using the words from the days it gives, for example Days 3, 4, 5, 7 and 9.</li>
+   <li>Write the secret words in a <b>notebook</b>, or on the <b>tracker sheet</b>: <a href="tracker-2026.pdf" download>download it here</a>.</li>
+   <li>After Christmas, give the notebook or tracker sheet to the teacher.</li>
+  </ol>
+  <p class="tip">Please stay with your child while they use the website.</p>
+ </section>
+
+ <section class="box teach">
+  <h2>For teachers</h2>
+  <ol>
+   <li>Send the website link to parents before 1 December.</li>
+   <li>Collect the notebooks or tracker sheets after Christmas.</li>
+   <li>Check that each day has its secret word or words, and look at the sentences from the 24 December task.</li>
+  </ol>
+ </section>
+
+
+
+ <p class="cta"><a class="btn" href="index.html">Open the calendar</a></p>
+</main>
+
+<footer>
+<div class="fhead"><img class="flogo" src="left.png" alt="" onerror="this.style.visibility='hidden'">
+ <div class="fcol"><div class="forg">Cherupushpa Mission League<small>Catholic Syro Malabar Eparchy of Great Britain</small></div>
+  <div class="ftitle">My Journey To Bethlehem · Suvara Calendar 2026</div>
+  <div><a href="index.html">Open the calendar</a> · <a href="tracker-2026.pdf" download>Download the tracker sheet</a></div></div>
+ <img class="flogo" src="right.png" alt="" onerror="this.style.visibility='hidden'"></div>
+<div class="fnote">🔒 This page does not ask for, collect or store any personal details, and does not track what you do on it.<br>
+👨‍👩‍👧 Children under 18 should use this website with the supervision of a parent or guardian.</div>
+</footer>
+<script>
+const LOGO_SWITCH_SECONDS=2;
+function logoFail(img){img.dataset.bad=1;img.classList.remove('on');const ok=[...document.querySelectorAll('#hlogo img')].filter(i=>!i.dataset.bad);if(!ok.length)document.getElementById('hlogo').style.display='none';else ok[0].classList.add('on');}
+setInterval(()=>{const imgs=[...document.querySelectorAll('#hlogo img')].filter(i=>!i.dataset.bad);if(imgs.length<2)return;const k=imgs.findIndex(i=>i.classList.contains('on'));imgs.forEach(i=>i.classList.remove('on'));imgs[(k+1)%imgs.length].classList.add('on');},LOGO_SWITCH_SECONDS*1000);
+const STEPS=[
+ {name:'Choose your group',icon:'📱',title:'1. Open the calendar',text:'Open the website link from your teacher. Choose <b>Juniors</b> (Year 5–7) or <b>Seniors</b> (Year 8 and above).',img:'img/step1.jpg',x:24,y:60},
+ {name:'Tap today’s date',icon:'🚪',title:'2. Tap today’s date',text:'The calendar shows all 24 days of December. Tap today’s date to open it.',img:'img/step2.jpg',x:84,y:23},
+ {name:'Do the activity',icon:'🙏',title:'3. Do the activity',text:'Read the prayer or Bible passage, watch the song, or do the kind act together. Then answer the quiz or tap the button at the end.',img:'img/step3.jpg',x:30,y:64},
+ {name:'Collect the word',icon:'✨',title:'4. Collect your secret word',text:'Your secret word (or words) for the day appears in the yellow box.',img:'img/step4.jpg',x:74,y:66},
+ {name:'Write it down',icon:'📝',title:'5. Write it down',text:'Write the word next to that day in a notebook, or on the tracker sheet (download it from this page).',img:'img/step5.jpg',x:30,y:27,paper:true},
+ {name:'Final task',icon:'⭐',title:'6. The final task on 24 December',text:'On Christmas Eve, use your collected words to make sentences, as the task asks. Then give your notebook or tracker sheet to your teacher.',mock:true}
+];
+let g=0,dir=1;
+function gRender(){const st=STEPS[g],sc=document.getElementById('gScene');
+ const pic=st.mock?`<div class="mock"><h4>24 December · Final task</h4><div class="q">Make a sentence using your words from Days 3, 4, 5, 7 and 9.</div><div class="ln"></div><div class="ln"></div><div class="q">Make another sentence using your words from Days 12 and 23.</div><div class="ln"></div><div class="ln"></div><p style="margin:10px 0 0;font-size:12px;color:#6a6fa3">Example only — the real task is on Day 24.</p></div>`
+  :`<div class="phone${st.paper?' paper':''}"><img src="${st.img}" alt="${st.title}"><span class="finger" style="left:${st.x}%;top:${st.y}%">👆</span></div>`;
+ sc.className='scene'+(dir<0?' back':'');void sc.offsetWidth;
+ sc.innerHTML=`<div class="stxt"><span class="art">${st.icon}</span><h3>${st.title}</h3><p>${st.text}</p></div>${pic}`;
+ document.getElementById('gName').textContent='Step '+(g+1)+' · '+st.name;
+ document.getElementById('gCount').textContent=(g+1)+' of '+STEPS.length;
+ document.getElementById('gPrev').disabled=g===0;
+ document.getElementById('gNext').textContent=g===STEPS.length-1?'Start again ↻':'Next step →';
+ document.getElementById('gDots').innerHTML=STEPS.map((_,i)=>`<button class="${i===g?'on':''}" aria-label="Step ${i+1}" onclick="gGo(${i})"></button>`).join('');}
+function gGo(i){dir=i>=g?1:-1;g=(i+STEPS.length)%STEPS.length;gRender();}
+document.getElementById('gPrev').onclick=()=>{if(g>0)gGo(g-1)};
+document.getElementById('gNext').onclick=()=>gGo(g===STEPS.length-1?0:g+1);
+let tx=null;const stg=document.querySelector('.stage');
+stg.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+stg.addEventListener('touchend',e=>{if(tx===null)return;const d=e.changedTouches[0].clientX-tx;tx=null;if(Math.abs(d)>50){if(d<0&&g<STEPS.length-1)gGo(g+1);else if(d>0&&g>0)gGo(g-1);}});
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'&&g<STEPS.length-1)gGo(g+1);if(e.key==='ArrowLeft'&&g>0)gGo(g-1);});
+STEPS.forEach(s=>{if(s.img){const i=new Image();i.src=s.img;}});
+gRender();
+</script>
+</body>
+</html>

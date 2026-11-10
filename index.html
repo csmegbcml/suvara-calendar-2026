@@ -100,7 +100,7 @@ main{max-width:1060px;margin:auto;padding:22px 16px 50px}
 .chooser .org{font-family:Georgia,serif;font-size:var(--h-main);font-weight:700;line-height:1.15;color:var(--navy)}
 .chooser .org2{font-size:var(--h-sub);color:#4a4f8a;margin-top:4px}
 .chooser h1{font-family:Georgia,serif;color:var(--red);font-size:var(--h-main);line-height:1.15;margin:10px 0 4px}
-.chooser .rule{width:70px;height:5px;border-radius:3px;background:var(--yellow);box-shadow:0 0 0 1px #e3d800;margin:10px auto 18px}
+.chooser .rule{width:70px;height:5px;border-radius:3px;background:var(--red);box-shadow:0 0 0 1px #e3d800;margin:10px auto 18px}
 .chooser .choose{font-size:17px;font-weight:700;color:var(--navy);margin:0 0 14px}
 .chooser .disc{margin:22px auto 0;max-width:560px;font-size:13px;line-height:1.6;color:#4a4f8a;border-top:1px solid #dcc9a0;padding-top:14px}
 .chooser .disc p{margin:0 0 6px}
@@ -140,7 +140,7 @@ body.youth{background:var(--cream)}
 .hero h1{font-family:Georgia,serif;margin:8px 0 2px;line-height:1.15;font-size:var(--h-main);color:var(--navy)}
 .hero h1 .a{color:var(--red)}
 .hero .sub{color:var(--navy);font-family:Georgia,serif;font-size:17px;margin:2px 0}
-.hero .rule{width:70px;height:5px;border-radius:3px;background:var(--yellow);box-shadow:0 0 0 1px #e3d800;margin:8px 0}
+.hero .rule{width:70px;height:5px;border-radius:3px;background:var(--red);box-shadow:0 0 0 1px #e3d800;margin:8px 0}
 .hero .meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:#3b4457}
 .hero .today{font-weight:700;color:var(--navy)}
 .hero .switch{display:inline-block;color:var(--navy);font-size:11px;padding:5px 10px}
@@ -180,6 +180,7 @@ footer{border-top:7px solid;border-image:repeating-linear-gradient(45deg,var(--r
  <h1>My Journey To Bethlehem 2026</h1>
  <div class="rule"></div>
  <p class="choose">Choose your age group to open the calendar</p>
+ <p style="margin:-6px 0 14px;font-size:14px"><a href="guideline.html" style="color:var(--red);font-weight:700">How to use the calendar →</a></p>
  <div class="cards">
   <button class="card j" onclick="setVersion('junior')"><div class="big">🎄</div><h2>Juniors</h2><span>Year 5 to Year 7</span></button>
   <button class="card y" onclick="setVersion('youth')"><div class="big">⭐</div><h2>Seniors</h2><span>Year 8 and above</span></button>
@@ -206,8 +207,9 @@ footer{border-top:7px solid;border-image:repeating-linear-gradient(45deg,var(--r
 
  <section class="progress trk" id="tracker">
   <h3>How-to guidelines</h3>
+  <p class="note" style="margin:6px 0 0;font-size:13.5px">New here? See the <a href="guideline.html" style="color:var(--red);font-weight:700">step-by-step guide with pictures</a>.</p>
   <ol id="howto"></ol>
-  <p class="note" style="margin:10px 0 0;font-size:13px">Your printed tracker sheet is your record — nothing is saved on this website.</p>
+  <p class="note" style="margin:10px 0 0;font-size:13px">Your tracker sheet or notebook is your record — nothing is saved on this website.</p>
  </section>
 </main>
 
@@ -215,7 +217,7 @@ footer{border-top:7px solid;border-image:repeating-linear-gradient(45deg,var(--r
 <div class="fhead"><img class="flogo" src="left.png" alt="" onerror="this.style.visibility='hidden'">
  <div class="fcol"><div class="forg">Cherupushpa Mission League<small>Catholic Syro Malabar Eparchy of Great Britain</small></div>
   <div class="ftitle">My Journey To Bethlehem  Suvara Calendar 2026</div>
-  <div><a href="cml-advent-tracker-2026.pdf" download>Download the tracker sheet</a> · <a href="#" onclick="openChooser();return false">Switch Juniors / Seniors</a></div></div>
+  <div><a href="guideline.html">How to use</a> · <a href="tracker-2026.pdf" download>Download the tracker sheet</a> · <a href="#" onclick="openChooser();return false">Switch Juniors / Seniors</a></div></div>
  <img class="flogo" src="right.png" alt="" onerror="this.style.visibility='hidden'"></div>
 <div class="fnote">🔒 This page does not ask for, collect or store any personal details, and does not track what you do on it.<br>
 👨‍👩‍👧 Children under 18 should use this website with the supervision of a parent or guardian.<br>
@@ -231,7 +233,10 @@ footer{border-top:7px solid;border-image:repeating-linear-gradient(45deg,var(--r
 <script>
 /* ===================== SETTINGS — edit these ===================== */
 const YEAR = 2026;
-const LOCK_DAYS = false;   // true = each door opens on its date (add ?preview to the link to test)
+const LOCK_DAYS = false;   // PRODUCTION: set to true. Each day opens on its date (UK time) and closes after BACK_DAYS.
+const BACK_DAYS = 5;       // how many earlier days stay open, e.g. on 10 Dec: days 5–10 are open
+const PREVIEW_KEY = 'cml-test-2026';  // add ?preview=cml-test-2026 to the link to test with every day open (change before going live)
+const TIMEZONE = 'Europe/London';
 
 /* The 24 secret words in order (based on Luke 2:10–11). Same for both versions, so one tracker sheet works for all. */
 const WORDS = ['Do','not','be','afraid','I','bring','you','good','news','of','great','joy',
@@ -354,10 +359,14 @@ const DONE_LABEL={prayer:'Amen 🙏 — I prayed it',video:'I watched and sang a
 
 let V=null;     // 'junior' | 'youth' (internal names for Juniors / Seniors)
 let got={};     // words unlocked during this visit only — nothing is stored
-const preview=/[?&]preview/.test(location.search);
-const now=new Date(),todayKey=new Date(now.getFullYear(),now.getMonth(),now.getDate()).getTime();
+const preview=new URLSearchParams(location.search).get('preview')===PREVIEW_KEY;
+const ukParts=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:TIMEZONE,year:'numeric',month:'numeric',day:'numeric'}).formatToParts(new Date()).map(p=>[p.type,p.value]));
+const todayKey=new Date(+ukParts.year,+ukParts.month-1,+ukParts.day).getTime();
+const DAY_MS=864e5;
 const dateOf=n=>new Date(YEAR,11,n);
-const isOpen=n=>!LOCK_DAYS||preview||dateOf(n).getTime()<=todayKey;
+const lockState=n=>{if(!LOCK_DAYS||preview)return 'open';const t=dateOf(n).getTime();
+ if(t>todayKey)return 'future';if(Math.round((todayKey-t)/DAY_MS)>BACK_DAYS)return 'closed';return 'open';};
+const isOpen=n=>lockState(n)==='open';
 const fmt=n=>dateOf(n).toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const k=()=>V==='junior'?'j':'y';
@@ -380,8 +389,8 @@ function logoFail(img){img.dataset.bad=1;img.classList.remove('on');const ok=[..
 setInterval(()=>{const imgs=[...document.querySelectorAll('#hlogo img')].filter(i=>!i.dataset.bad);if(imgs.length<2)return;const k=imgs.findIndex(i=>i.classList.contains('on'));imgs.forEach(i=>i.classList.remove('on'));imgs[(k+1)%imgs.length].classList.add('on');},LOGO_SWITCH_SECONDS*1000);
 
 const HOWTO={
-junior:['Click this button to download your tracker sheet, then print it: <a class="btn gold sm" href="cml-advent-tracker-2026.pdf" download>⬇ Download tracker (PDF)</a>','Each day, tap that day’s door on the calendar.','Do the activity, then pass the quiz or tap the button to finish the challenge.','A <b>secret word</b> appears — write it in the box with the same day number on your sheet.','On 24 December, copy all 24 words in order to read your secret message, then give your sheet to your teacher.'],
-youth:['Click this button to download the tracker sheet (2 pages), then print it: <a class="btn gold sm" href="cml-advent-tracker-2026.pdf" download>⬇ Download tracker (PDF)</a>','Each day, open that day’s door for a reading, prayer, song or challenge.','Complete it to unlock that day’s <b>secret word</b>.','Write the word in the matching day box on <b>page 1</b>. Write your reflection in the matching day space on <b>page 2</b>.','On 24 December, read your 24 words in order, then hand your sheet to your teacher.']};
+junior:['Click this button to download your tracker sheet, then print it: <a class="btn gold sm" href="tracker-2026.pdf" download>⬇ Download tracker (PDF)</a>','Each day, tap that day’s door on the calendar.','Do the activity, then pass the quiz or tap the button to finish the challenge.','A <b>secret word</b> appears — write it next to that day on your sheet or in a notebook.','On 24 December, do the final task using your words, then give your sheet or notebook to your teacher.'],
+youth:['Click this button to download the tracker sheet, then print it: <a class="btn gold sm" href="tracker-2026.pdf" download>⬇ Download tracker (PDF)</a>','Each day, open that day’s door for a reading, prayer, song or challenge.','Complete it to unlock that day’s <b>secret word</b>.','Write the word next to that day on your sheet or in a notebook, with a short reflection if you like.','On 24 December, do the final task using your words, then hand your sheet or notebook to your teacher.']};
 
 function render(){
  document.body.className=V;
@@ -402,21 +411,24 @@ let cur=1;
 function openDay(n){cur=n;const d=DAYS[n-1],K=k();
  document.getElementById('mTag').textContent='Day '+n+' · '+fmt(n);
  const body=document.getElementById('mBody');
- if(!isOpen(n)){document.getElementById('mTitle').textContent='Not yet!';
-  body.innerHTML=`<p class="center" style="font-size:44px;margin:0">🔒</p><p class="center">This door opens on <b>${fmt(n)}</b>.</p>`;show();return;}
+ const st=lockState(n);
+ if(st==='future'){document.getElementById('mTitle').textContent='Not yet!';
+  body.innerHTML=`<p class="center" style="font-size:44px;margin:0">🔒</p><p class="center">This day opens on <b>${fmt(n)}</b>.</p>`;show();return;}
+ if(st==='closed'){document.getElementById('mTitle').textContent='This day has closed';
+  body.innerHTML=`<p class="center" style="font-size:44px;margin:0">⏳</p><p class="center">Days stay open for ${BACK_DAYS} days after their date, so this one is no longer available.<br>Carry on with today’s day!</p>`;show();return;}
  document.getElementById('mTitle').textContent=d.title;
  let h=`<span class="kind">${KIND[d.kind][K]}</span><p>${esc(d[K])}</p>`;
  if(d.ref)h+=`<div class="verse">📖 Read: <b>${esc(d.ref)}</b></div>`;
  if(d.prayer)h+=`<div class="prayer">${esc(d.prayer)}</div>`;
  if(d.video){const id=pick(d.video);if(id)h+=`<div class="video"><iframe src="https://www.youtube.com/embed/${encodeURIComponent(id)}?rel=0&playsinline=1${/^https?:/.test(location.origin)?'&origin='+encodeURIComponent(location.origin):''}" title="${esc(d.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="vlink">Video not playing? <a href="https://www.youtube.com/watch?v=${encodeURIComponent(id)}" target="_blank" rel="noopener">Watch it on YouTube</a></div>`;}
  const ask=d.ask&&d.ask[K];if(ask)h+=`<div class="ask"><b>${K==='j'?'💬 Talk about it:':'Think about it:'}</b> ${esc(ask)}</div>`;
- if(K==='y')h+=`<p class="note" style="font-size:13px">✍ Write a line or two about this in the <b>Day ${n}</b> space on <b>page 2</b> of your tracker sheet (Seniors reflections page).</p>`;
+ if(K==='y')h+=`<p class="note" style="font-size:13px">✍ Write a short reflection about this next to <b>Day ${n}</b> on your tracker sheet.</p>`;
  /* challenge */
  h+=`<div class="challenge">`;
  if(got[n]){h+=`<p class="note center">You already unlocked this word ✓</p>`;}
  else if(d.quiz){h+=`<h3>${K==='j'?'🧩 Quiz time! Get it right to unlock your word':'Answer to unlock today’s word'}</h3><p style="margin:0 0 4px">${esc(d.quiz.q)}</p><div class="opts">${d.quiz.o.map((o,i)=>`<button class="opt" data-i="${i}">${esc(o)}</button>`).join('')}</div><div class="fb" id="fb"></div>`;}
  else{h+=`<h3>${K==='j'?'Finished the activity?':'Done it?'}</h3><button class="btn" id="doneBtn">${DONE_LABEL[d.kind]}</button>`;}
- h+=`<div class="word${got[n]?' show':''}" id="word"><span class="note">Your secret word for Day ${n} is</span><span class="w">${esc(WORDS[n-1])}</span><span class="note">Write it in the <b>Day ${n}</b> box on <b>page 1</b> of your tracker sheet.</span></div></div>`;
+ h+=`<div class="word${got[n]?' show':''}" id="word"><span class="note">Your secret word for Day ${n} is</span><span class="w">${esc(WORDS[n-1])}</span><span class="note">Write it next to <b>Day ${n}</b> on your tracker sheet or in your notebook.</span></div></div>`;
  body.innerHTML=h;
  const done=document.getElementById('doneBtn');if(done)done.onclick=()=>{done.remove();unlock(n)};
  body.querySelectorAll('.opt').forEach(btn=>btn.onclick=()=>{
@@ -426,7 +438,7 @@ function openDay(n){cur=n;const d=DAYS[n-1],K=k();
  });
  show();}
 function unlock(n){got[n]=true;document.getElementById('word').classList.add('show');confetti(n===24?160:60);drawGrid();
- if(n===24)document.getElementById('word').insertAdjacentHTML('afterend',`<div class="word show" style="margin-top:12px"><span class="note">🎉 That’s all 24! Now read the words on your tracker sheet in order — what is your secret Christmas message?</span></div>`);}
+ if(n===24)document.getElementById('word').insertAdjacentHTML('afterend',`<div class="word show" style="margin-top:12px"><span class="note">🎉 That’s all 24! Now do the final task using your words.</span></div>`);}
 function show(){const m=document.getElementById('modal');m.classList.add('show');m.scrollTop=0;}
 function closeDay(){document.getElementById('modal').classList.remove('show');document.getElementById('mBody').innerHTML='';}  /* clearing stops any playing video */
 document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeDay()});
