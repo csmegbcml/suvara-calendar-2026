@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Journey To Bethlehem - Suvara Calendar 2026</title>
+<style>
+/* ---------- shared ---------- */
+:root{--h-main:clamp(20px,4.6vw,40px);--h-sub:clamp(11.5px,2vw,17px);--f-main:clamp(16px,2.6vw,21px);--f-sub:clamp(11.5px,1.6vw,13px);--navy:#2a3187;--red:#ed1a24;--yellow:#fcf300;--gold:#fcf300;--green:#1f7a45;--cream:#fffbea;--ink:#2a3187}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--cream);min-height:100vh}
+.serif{font-family:Georgia,'Times New Roman',serif}
+button{font-family:inherit}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 18px;position:relative;z-index:2}
+.brand{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;line-height:1.3}
+.brand .x{font-size:28px;line-height:1}
+.brandwrap{display:flex;align-items:center;gap:10px;min-width:0}
+.logo{height:46px;width:auto;max-width:90px;object-fit:contain;display:block}
+@media(max-width:520px){.topbar{padding:8px 12px}.logo{height:36px;max-width:64px}.brand{font-size:9.5px;gap:6px}.brand small{font-size:9.5px}.brand .x{font-size:20px}}
+.brand small{display:block;font-weight:400;text-transform:none;letter-spacing:0;font-size:11px;opacity:.85}
+.switch{border:1.5px solid currentColor;background:transparent;color:inherit;border-radius:20px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.btn{display:inline-block;border:0;border-radius:26px;padding:12px 22px;font-weight:700;font-size:15px;cursor:pointer;text-decoration:none;background:var(--red);color:#fff;transition:transform .15s,filter .15s}
+.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn.gold{background:var(--yellow);color:var(--navy);box-shadow:inset 0 0 0 1.5px #e3d800}.btn.ghost{background:transparent;color:var(--red);border:2px solid var(--red)}
+main{max-width:1060px;margin:auto;padding:22px 16px 50px}
+.hidden{display:none!important}
+
+/* progress + message */
+.progress{background:#fff;border-radius:18px;padding:16px 18px;box-shadow:0 4px 16px #2a318714;margin:0 0 20px}
+.progress .row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.progress h3{margin:0;font-size:18px}
+.bar{height:14px;background:#eee3c9;border-radius:10px;overflow:hidden;margin:10px 0 12px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),#f3c969);border-radius:10px;transition:width .6s}
+.phrase{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1.5px dashed #c9b98f;border-radius:8px;padding:5px 8px;font-size:12px;min-width:44px;text-align:center;color:#9a8c6a;background:#fffdf7;cursor:pointer}
+.chip.got{border-style:solid;border-color:var(--gold);color:var(--red);font-weight:700;background:#fdf3d7;text-transform:uppercase}
+.chip small{display:block;font-size:9px;color:#8a8a8a;font-weight:400;text-transform:none}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 14px}
+.steps a,.steps div{display:flex;align-items:center;gap:8px;background:#fff;border-radius:12px;padding:9px 10px;font-size:13px;line-height:1.25;box-shadow:0 2px 8px #2a318710;color:inherit;text-decoration:none}
+.steps b{flex:none;width:24px;height:24px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-size:13px}
+@media(max-width:620px){.steps{gap:5px}.steps a,.steps div{flex-direction:column;text-align:center;gap:4px;padding:7px 4px;font-size:11.5px}.steps b{width:22px;height:22px;font-size:12px}}
+.trk{margin-top:26px}.trk .btn.sm{padding:6px 12px;font-size:12.5px;margin:4px 0 2px;vertical-align:middle}
+.trk ol{margin:10px 0 0;padding-left:20px;font-size:14px;line-height:1.6}.trk ol li{margin-bottom:4px}
+.center{text-align:center}
+
+/* grid + door animation */
+.days{display:grid;gap:10px;perspective:900px}
+.day{position:relative;border:0;border-radius:14px;cursor:pointer;color:#fff;padding:10px 6px;min-height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:transform .2s;transform-style:preserve-3d}
+.day:hover,.day:focus-visible{transform:translateY(-3px) scale(1.03);outline:0}
+.day.opening{animation:door .45s ease-in forwards}
+@keyframes door{to{transform:rotateY(-80deg);opacity:.2}}
+.day .n{font-weight:700;font-size:22px;line-height:1}
+.day .md{display:flex;align-items:baseline;gap:4px;line-height:1}.day .mo,.day .wd{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;opacity:.85;line-height:1}
+.month{display:flex;align-items:baseline;justify-content:space-between;margin:0 2px 8px}.month h2{margin:0;font-family:Georgia,serif;font-size:22px;color:var(--navy)}.month span{font-size:12px;color:#6a7280}.day .ic{font-size:26px;line-height:1}
+.day .done{position:absolute;top:6px;right:7px;background:#fff;color:var(--green);width:22px;height:22px;border-radius:50%;font-size:13px;font-weight:700;display:grid;place-items:center;box-shadow:0 1px 4px #0004}
+.day.locked{filter:grayscale(.9);opacity:.6}
+
+/* modal */
+.modal{display:none;position:fixed;inset:0;background:#07152cc4;z-index:20;padding:16px;overflow:auto}
+.modal.show{display:flex;align-items:flex-start;justify-content:center}
+.panel{background:#fffaf0;width:min(660px,100%);border-radius:20px;overflow:hidden;box-shadow:0 14px 50px #0007;margin:auto 0;animation:pop .3s ease-out}
+@keyframes pop{from{transform:scale(.92);opacity:0}}
+.phead{padding:18px 22px;color:#fff;position:relative}
+.phead small{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:.9}
+.phead h2{margin:6px 0 0;font-size:27px;font-family:Georgia,serif}
+.close{position:absolute;right:14px;top:14px;border:0;background:#ffffff2e;color:#fff;font-size:22px;border-radius:50%;width:36px;height:36px;cursor:pointer}
+.pbody{padding:18px 22px 22px;font-size:15.5px;line-height:1.6}
+.kind{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:4px 10px;border-radius:12px;background:var(--navy);color:var(--yellow)}
+.verse{background:#fffbd6;border-left:4px solid var(--red);padding:10px 14px;margin:12px 0;border-radius:0 8px 8px 0}
+.prayer{background:#fff;border:1px solid #e6dcc6;border-radius:12px;padding:12px 15px;font-family:Georgia,serif;font-size:16.5px;margin:12px 0}
+.video{position:relative;padding-top:56.25%;border-radius:14px;overflow:hidden;background:#000;margin:12px 0 4px}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vlink{font-size:12px;color:#5a6471}.vlink a{color:var(--red)}
+.ask{background:#eef4fb;border-radius:12px;padding:10px 14px;margin:12px 0;font-size:14.5px}
+.challenge{margin-top:16px;border-top:2px dashed #e0cfa6;padding-top:16px}
+.challenge h3{margin:0 0 8px;font-size:17px;color:var(--navy)}
+.opts{display:grid;gap:8px;margin:8px 0}
+.opt{text-align:left;border:2px solid #e2d6b8;background:#fff;border-radius:12px;padding:11px 14px;font-size:15px;cursor:pointer;transition:border .15s,background .15s}
+.opt:hover{border-color:var(--gold)}.opt:disabled{color:inherit;cursor:default}
+.opt.wrong{border-color:#d9534f;background:#fdecec;animation:shake .35s}
+.opt.right{border-color:var(--green);background:#e8f5ee}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.fb{font-size:13.5px;min-height:20px;margin:4px 0 0}
+.journal{width:100%;min-height:80px;border:1.5px solid #d9cba8;border-radius:10px;padding:10px;font:14px/1.5 Arial,sans-serif;resize:vertical;background:#fff}
+.note{font-size:12px;color:#6a7280}
+.word{display:none;margin-top:14px;text-align:center;background:linear-gradient(135deg,#fffde0,#fff7a3);border:2px dashed var(--red);border-radius:16px;padding:16px;animation:pop .35s ease-out}
+.word.show{display:block}
+.word .w{display:block;font:700 40px Georgia,serif;color:var(--red);letter-spacing:2px;text-transform:uppercase;margin:4px 0}
+.pfoot{padding:0 22px 22px;text-align:center}
+
+/* confetti */
+.cf{position:fixed;top:-12px;width:9px;height:14px;z-index:40;pointer-events:none;border-radius:2px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg)}}
+@media(prefers-reduced-motion:reduce){.cf,.day.opening{animation:none!important}}
+
+/* chooser */
+.chooser{position:fixed;inset:0;z-index:30;background:linear-gradient(180deg,#fffbea,#fff3b8);color:var(--ink);display:flex;align-items:center;justify-content:center;padding:20px 16px;overflow:auto}
+.chooser .in{max-width:720px;width:100%;text-align:center;margin:auto}
+.chooser .logos{display:flex;justify-content:center;align-items:center;gap:22px;margin-bottom:14px}
+.chooser .logos img{height:110px;width:110px;object-fit:contain}
+.chooser .org{font-family:Georgia,serif;font-size:var(--h-main);font-weight:700;line-height:1.15;color:var(--navy)}
+.chooser .org2{font-size:var(--h-sub);color:#4a4f8a;margin-top:4px}
+.chooser h1{font-family:Georgia,serif;color:var(--red);font-size:var(--h-main);line-height:1.15;margin:10px 0 4px}
+.chooser .rule{width:70px;height:5px;border-radius:3px;background:var(--yellow);box-shadow:0 0 0 1px #e3d800;margin:10px auto 18px}
+.chooser .choose{font-size:17px;font-weight:700;color:var(--navy);margin:0 0 14px}
+.chooser .disc{margin:22px auto 0;max-width:560px;font-size:13px;line-height:1.6;color:#4a4f8a;border-top:1px solid #dcc9a0;padding-top:14px}
+.chooser .disc p{margin:0 0 6px}
+@media(max-width:520px){.chooser .logos img{height:80px;width:80px}.chooser .choose{font-size:15px}}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{border:0;border-radius:20px;padding:22px 18px;cursor:pointer;text-align:center;transition:transform .2s;color:var(--ink)}
+.card:hover{transform:translateY(-4px)}
+.card .big{font-size:40px;line-height:1.1}.card h2{margin:6px 0 4px;font-size:24px}.card span{font-size:15px;font-weight:700}
+@media(max-width:520px){.cards{gap:10px}.card{padding:16px 8px;border-radius:16px}.card .big{font-size:32px}.card h2{font-size:20px}.card span{font-size:13px}}
+.card.j{background:linear-gradient(160deg,#ff3b44,var(--red));color:#fff;box-shadow:0 6px 18px #ed1a2444,inset 0 -5px 0 #0002}.card.j span{color:var(--yellow)}
+.card.y{background:linear-gradient(160deg,#3a43a5,var(--navy));color:#fff;box-shadow:0 6px 18px #2a318744,inset 0 -5px 0 #0002}.card.y span{color:var(--yellow)}
+.card.y h2{font-family:Georgia,serif}
+
+/* ---------- JUNIORS theme (9–12) ---------- */
+body.junior{background:var(--cream)}
+.junior .days{grid-template-columns:repeat(4,1fr)}
+@media(min-width:620px){.junior .days{grid-template-columns:repeat(6,1fr)}}
+.junior .day{border-radius:14px;box-shadow:0 4px 0 #0003,inset 0 0 0 3px #ffffff40}
+.junior .day:nth-child(4n+1){background:var(--red)}.junior .day:nth-child(4n+2){background:var(--navy)}.junior .day:nth-child(4n+3){background:var(--yellow);color:var(--navy)}.junior .day:nth-child(4n){background:var(--green)}
+.junior .progress h3{color:var(--navy)}
+.junior .phead{background:linear-gradient(135deg,var(--red),#b30f17)}
+.junior .phead h2{font-family:'Arial Black',Arial,sans-serif;font-size:24px}
+
+/* ---------- SENIORS theme (13–16) ---------- */
+body.youth{background:var(--cream)}
+.hero{background:linear-gradient(180deg,#fffbea,#fff3b8);border-bottom:7px solid;border-image:repeating-linear-gradient(45deg,var(--red) 0 10px,#fff 10px 20px) 7}
+.lights{height:26px;background:
+ radial-gradient(ellipse 5px 7px at 12px 17px,var(--red) 96%,transparent) 0 0/96px 26px repeat-x,
+ radial-gradient(ellipse 5px 7px at 36px 19px,var(--yellow) 96%,transparent) 0 0/96px 26px repeat-x,
+ radial-gradient(ellipse 5px 7px at 60px 17px,var(--green) 96%,transparent) 0 0/96px 26px repeat-x,
+ radial-gradient(ellipse 5px 7px at 84px 19px,#5b8cff 96%,transparent) 0 0/96px 26px repeat-x,
+ linear-gradient(#6b5a3a,#6b5a3a) 0 8px/100% 2px no-repeat;filter:drop-shadow(0 0 3px #fff8)}
+.chooser .lights{position:fixed;left:0;right:0;top:0}
+.heroin{max-width:1060px;margin:auto;padding:16px 20px 16px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:16px}
+.hero .org{font-family:Georgia,serif;font-size:var(--h-main);font-weight:700;line-height:1.15;color:var(--navy)}
+.hero .org2{font-size:var(--h-sub);color:#4a4f8a;margin-top:4px}
+.hero h1{font-family:Georgia,serif;margin:8px 0 2px;line-height:1.15;font-size:var(--h-main);color:var(--navy)}
+.hero h1 .a{color:var(--red)}
+.hero .sub{color:var(--navy);font-family:Georgia,serif;font-size:17px;margin:2px 0}
+.hero .rule{width:70px;height:5px;border-radius:3px;background:var(--yellow);box-shadow:0 0 0 1px #e3d800;margin:8px 0}
+.hero .meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:#3b4457}
+.hero .today{font-weight:700;color:var(--navy)}
+.hero .switch{display:inline-block;color:var(--navy);font-size:11px;padding:5px 10px}
+.hlogo{position:relative;width:150px;height:150px}
+.hlogo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .6s}
+.hlogo img.on{opacity:1}
+@media(max-width:620px){.heroin{padding:12px 14px;gap:10px}.hlogo{width:78px;height:78px}.hero .sub{font-size:14px}.hero .meta{font-size:12px;gap:6px}}
+.youth .days{grid-template-columns:repeat(4,1fr)}
+@media(min-width:620px){.youth .days{grid-template-columns:repeat(6,1fr)}}
+.youth .day{background:#fffdf7;color:var(--navy);border:1.5px solid #dcc9a0;box-shadow:0 3px 10px #2a318712}
+.youth .day .n{font-family:Georgia,serif;font-size:26px;color:var(--red)}
+.youth .day:nth-child(4n+2) .n{color:var(--navy)}.youth .day:nth-child(4n+3) .n{color:var(--green)}.youth .day:nth-child(4n) .n{color:var(--navy)}
+.youth .day{border-top:5px solid var(--yellow)}.youth .day:nth-child(even){border-top-color:var(--red)}
+.youth .day .ic{font-size:20px;filter:saturate(.7)}
+.youth .progress h3{font-family:Georgia,serif;color:var(--navy)}
+.youth .phead{background:linear-gradient(135deg,var(--navy),#1b2070)}
+
+footer .fhead{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;max-width:760px;margin:0 auto 10px}
+footer .flogo{height:90px;width:90px;object-fit:contain}
+footer .fcol{display:flex;flex-direction:column;gap:6px}
+footer .ftitle{font-family:Georgia,serif;font-size:var(--f-main);font-weight:700;line-height:1.2}
+footer .forg{font-family:Georgia,serif;font-size:var(--f-main);font-weight:700;line-height:1.2;color:var(--yellow)}
+footer .forg small{display:block;font-family:Arial,Helvetica,sans-serif;font-size:var(--f-sub);font-weight:400;color:#e9ecf3;margin-top:4px}
+@media(max-width:520px){footer .flogo{height:58px;width:58px}footer .fhead{gap:8px}footer .fcol{font-size:12px}}
+footer .fnote{max-width:640px;margin:12px auto 0;padding-top:12px;border-top:1px solid #ffffff2e;font-size:12px;color:#d6deea;line-height:1.6}
+footer{text-align:center;background:var(--navy);color:#fff;padding:22px 14px;font-size:13px;line-height:1.7}footer a{color:var(--yellow)}
+footer{border-top:7px solid;border-image:repeating-linear-gradient(45deg,var(--red) 0 10px,#fff 10px 20px) 7}
+</style>
+</head>
+<body>
+
+<!-- Version chooser (shown on first visit, or via the Switch button) -->
+<div class="chooser hidden" id="chooser"><div class="lights" aria-hidden="true"></div><div class="in" style="padding-top:18px">
+ <div class="logos"><img src="left.png" alt="" onerror="this.remove()"><img src="right.png" alt="" onerror="this.remove()"></div>
+ <div class="org">Cherupushpa Mission League</div>
+ <div class="org2">Catholic Syro Malabar Eparchy of Great Britain</div>
+ <h1>My Journey To Bethlehem 2026</h1>
+ <div class="rule"></div>
+ <p class="choose">Choose your age group to open the calendar</p>
+ <div class="cards">
+  <button class="card j" onclick="setVersion('junior')"><div class="big">🎄</div><h2>Juniors</h2><span>Year 5 to Year 7</span></button>
+  <button class="card y" onclick="setVersion('youth')"><div class="big">⭐</div><h2>Seniors</h2><span>Year 8 and above</span></button>
+ </div>
+ <div class="disc">
+  <p>🔒 This page does not ask for, collect or store any personal details, and does not track what you do on it.</p>
+  <p>👨‍👩‍👧 Children under 18 should use this website with the supervision of a parent or guardian.</p>
+ </div>
+</div></div>
+
+<div class="lights" aria-hidden="true" style="background-color:#fffbea"></div>
+<header class="hero" id="hero"></header>
+
+<main>
+ <div class="steps">
+  <div><b>1</b><span>Open the day</span></div>
+  <div><b>2</b><span>Do the activity</span></div>
+  <div><b>3</b><span>Collect the word</span></div>
+  <a href="#tracker"><b>4</b><span>Write it on your tracker sheet</span></a>
+ </div>
+
+ <div class="month"><h2>December 2026</h2><span>Tap a day to open it</span></div>
+ <div class="days" id="days"></div>
+
+ <section class="progress trk" id="tracker">
+  <h3>How-to guidelines</h3>
+  <ol id="howto"></ol>
+  <p class="note" style="margin:10px 0 0;font-size:13px">Your printed tracker sheet is your record — nothing is saved on this website.</p>
+ </section>
+</main>
+
+<footer>
+<div class="fhead"><img class="flogo" src="left.png" alt="" onerror="this.style.visibility='hidden'">
+ <div class="fcol"><div class="forg">Cherupushpa Mission League<small>Catholic Syro Malabar Eparchy of Great Britain</small></div>
+  <div class="ftitle">My Journey To Bethlehem  Suvara Calendar 2026</div>
+  <div><a href="cml-advent-tracker-2026.pdf" download>Download the tracker sheet</a> · <a href="#" onclick="openChooser();return false">Switch Juniors / Seniors</a></div></div>
+ <img class="flogo" src="right.png" alt="" onerror="this.style.visibility='hidden'"></div>
+<div class="fnote">🔒 This page does not ask for, collect or store any personal details, and does not track what you do on it.<br>
+👨‍👩‍👧 Children under 18 should use this website with the supervision of a parent or guardian.<br>
+<span style="opacity:.8">Videos are played from YouTube.</span></div>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="panel">
+ <div class="phead"><button class="close" onclick="closeDay()" aria-label="Close">×</button><small id="mTag"></small><h2 id="mTitle"></h2></div>
+ <div class="pbody" id="mBody"></div>
+ <div class="pfoot"><button class="btn" onclick="closeDay()">Back to calendar</button></div>
+</div></div>
+
+<script>
+/* ===================== SETTINGS — edit these ===================== */
+const YEAR = 2026;
+const LOCK_DAYS = false;   // true = each door opens on its date (add ?preview to the link to test)
+
+/* The 24 secret words in order (based on Luke 2:10–11). Same for both versions, so one tracker sheet works for all. */
+const WORDS = ['Do','not','be','afraid','I','bring','you','good','news','of','great','joy',
+               'for','all','the','people','to','you','is','born','this','day','a','Saviour'];
+
+/* Each day: kind = prayer | bible | video | action
+   j = Juniors (9–12) text, y = Seniors (13–16) text.
+   video: YouTube video IDs (the part after watch?v=) — SAMPLES, replace with your own.
+   quiz (bible days): q = question, o = options, a = index of correct option (0 = first). */
+const DAYS = [
+{kind:'prayer',icon:'🕯',title:'Advent begins',
+ j:'Advent has begun! With a grown-up, light a candle and pray this prayer together as a family.',
+ y:'Advent is a season of waiting and getting ready. Put your phone down for two minutes, then pray this slowly.',
+ prayer:'Come, Lord Jesus. Help me to get my heart ready for You this Advent. Amen.',
+ ask:{j:'What is one thing you are excited about this Christmas?',y:'What would you like to be different in your life by Christmas?'}},
+{kind:'bible',icon:'📖',title:'A great light',ref:'Isaiah 9:2–7',
+ j:'Read Isaiah 9:2 and 9:6 with your family. God promised that a special child would bring light to the world!',
+ y:'Read Isaiah 9:2–7. Isaiah wrote this about 700 years before Jesus was born.',
+ quiz:{q:'In Isaiah 9:6, which of these names is given to the child?',o:['Wonderful Counsellor','Mighty Warrior King','Great Teacher'],a:0},
+ ask:{j:'How can you be a light for someone today?',y:'Where do you see “darkness” in the world today, and how could you bring some light into it?'}},
+{kind:'video',icon:'🎵',title:'Sing and worship',
+ j:'Watch and sing along to this Christmas worship song. Can you join in with the actions?',
+ y:'Listen to this worship song. Close your eyes for the chorus and make the words your own prayer.',
+ video:{j:'KYOnfhEuw9o',y:'Qf6OoAZbAQg'},
+ ask:{j:'Which part of the song did you like best?',y:'Which line stood out to you, and why?'}},
+{kind:'action',icon:'♡',title:'Help without being asked',
+ j:'Do one helpful job at home today without being asked — set the table, tidy your shoes or help with the washing up.',
+ y:'Do a job at home today that nobody asked you to do — and don’t mention it to anyone. Notice how it feels.'},
+{kind:'prayer',icon:'🙏',title:'Hail Mary',
+ j:'Pray the Hail Mary slowly with your family. Think about Mary saying “yes” to God.',
+ y:'Pray the Hail Mary slowly. Pause after each line and think about what Mary was saying “yes” to.',
+ prayer:'Hail Mary, full of grace, the Lord is with thee. Blessed art thou among women, and blessed is the fruit of thy womb, Jesus. Holy Mary, Mother of God, pray for us sinners, now and at the hour of our death. Amen.'},
+{kind:'bible',icon:'👼',title:'Mary says yes',ref:'Luke 1:26–38',
+ j:'Read the story of the angel visiting Mary in Luke 1:26–38.',
+ y:'Read Luke 1:26–38. Mary was probably about your age when this happened.',
+ quiz:{q:'What was the name of the angel who visited Mary?',o:['Michael','Gabriel','Raphael'],a:1},
+ ask:{j:'Mary trusted God. When is it hard for you to trust God?',y:'Mary said yes without knowing the whole plan. What might God be asking you to say yes to?'}},
+{kind:'action',icon:'✉',title:'A card of kindness',
+ j:'Make a Christmas card for someone who might feel lonely — a grandparent, a neighbour or someone at church — and give it this week.',
+ y:'Write a handwritten note to someone who has helped you this year — a teacher, coach, catechist or grandparent — and tell them why.'},
+{kind:'prayer',icon:'🌹',title:'Mary, our Mother',
+ j:'Today the Church celebrates Mary’s Immaculate Conception. Ask Mary to help you love Jesus more.',
+ y:'Today the Church celebrates Mary’s Immaculate Conception. Spend a few minutes asking Mary to pray for you.',
+ prayer:'Mary, Mother of Jesus, be a mother to me too. Help me to say “yes” to God like you did. Amen.'},
+{kind:'video',icon:'🎵',title:'Sing and worship',
+ j:'Time for another song! Stand up and sing along with your family.',
+ y:'Listen to this worship song. What does it say about who Jesus is?',
+ video:{j:'oWek4spZKog',y:'BTJvNrTix6k'},
+ ask:{j:'Can you teach the actions to someone in your family?',y:'Write down one line from the song that you want to remember this week.'}},
+{kind:'bible',icon:'💭',title:'Joseph’s dream',ref:'Matthew 1:18–24',
+ j:'Read Matthew 1:18–24, where an angel speaks to Joseph in a dream.',
+ y:'Read Matthew 1:18–24. Joseph had to make a hard choice, and he trusted God.',
+ quiz:{q:'What does the name “Emmanuel” mean?',o:['God saves','God is with us','Prince of Peace'],a:1},
+ ask:{j:'Where do you feel God is with you?',y:'Joseph did the right thing even when it was hard. When have you had to do that?'}},
+{kind:'action',icon:'🎁',title:'Secret kindness',
+ j:'Do a secret act of kindness today — something good for someone without them knowing it was you.',
+ y:'Do a secret act of kindness for someone you don’t usually get on with.'},
+{kind:'prayer',icon:'🌍',title:'Children of the world',
+ j:'Pray for children around the world who are poor, hungry, sick or without a home this Christmas.',
+ y:'Think of one place in the world where children are suffering right now. Pray for them by name.',
+ prayer:'Jesus, You were born in a stable. Please care for every child who has little this Christmas, and show me how I can help. Amen.'},
+{kind:'video',icon:'🔔',title:'Sing for joy',
+ j:'Christmas is getting closer! Sing and dance along to this song.',
+ y:'Listen to this song and think about the joy of Christmas — not the presents, but the reason.',
+ video:{j:'I7NZaXr5FNE',y:'182xcb3GyOg'},
+ ask:{j:'What makes you feel joyful?',y:'What is the difference between being happy and having joy?'}},
+{kind:'bible',icon:'🤝',title:'Mary visits Elizabeth',ref:'Luke 1:39–45',
+ j:'Read Luke 1:39–45, where Mary visits her cousin and baby John jumps for joy!',
+ y:'Read Luke 1:39–56, including Mary’s song of praise (the Magnificat).',
+ quiz:{q:'Who did Mary go to visit?',o:['Her cousin Elizabeth','Her friend Anna','Joseph’s mother'],a:0},
+ ask:{j:'Who could you visit or call this week to make them happy?',y:'Mary hurried to help someone else. Who around you could use your help right now?'}},
+{kind:'action',icon:'☎',title:'Call someone special',
+ j:'Phone or video call a grandparent or relative you haven’t spoken to for a while. Tell them you are praying for them.',
+ y:'Call (don’t text!) a grandparent or older relative. Ask them what Christmas was like when they were your age.'},
+{kind:'prayer',icon:'✦',title:'Count your blessings',
+ j:'Before bed, tell God three things you are thankful for today.',
+ y:'Write down five things you are grateful for this year — including one hard thing that helped you grow — and thank God for each.',
+ prayer:'Thank You, God, for all Your gifts to me. You are so good. Amen.'},
+{kind:'video',icon:'🎵',title:'Sing and worship',
+ j:'Sing along with this worship song. Can you sing it all the way through?',
+ y:'Listen to this song quietly, as a prayer.',
+ video:{j:'aDP1JLeXI5k',y:'XnCfnwKG3s8'},
+ ask:{j:'Who would you like to sing this song with?',y:'How does this song change the way you think about Christmas?'}},
+{kind:'bible',icon:'🫏',title:'No room at the inn',ref:'Luke 2:1–7',
+ j:'Read Luke 2:1–7, the story of Jesus being born in Bethlehem.',
+ y:'Read Luke 2:1–7. God chose to arrive in the most humble way possible.',
+ quiz:{q:'Where was baby Jesus laid after he was born?',o:['In a manger','In a cradle at the inn','In the Temple'],a:0},
+ ask:{j:'How can we make room for Jesus in our hearts?',y:'What takes up so much room in your life that there’s little left for God?'}},
+{kind:'action',icon:'🧺',title:'Share with others',
+ j:'Choose a toy, book or some food to give to someone in need, or to a collection at church.',
+ y:'Choose something good — not just something old — to give to someone in need or to a charity collection.'},
+{kind:'prayer',icon:'⛪',title:'Pray for our mission',
+ j:'Pray for your priests, catechists and all the families in your mission.',
+ y:'Pray for your priests, catechists and the young people in your mission by name.',
+ prayer:'Lord Jesus, bless our priests, our teachers and all the families of our mission. Help us to be one family in You. Amen.'},
+{kind:'bible',icon:'🐑',title:'The shepherds',ref:'Luke 2:8–14',
+ j:'Read Luke 2:8–14, where the angels bring good news to the shepherds.',
+ y:'Read Luke 2:8–14. The first people to hear the news were ordinary workers on a night shift.',
+ quiz:{q:'What did the angels sing?',o:['Glory to God in the highest','Joy to the world','Holy, holy, holy'],a:0},
+ ask:{j:'Why do you think God told the shepherds first?',y:'What does it tell you about God that the news went to shepherds first?'}},
+{kind:'video',icon:'⭐',title:'Get ready for Jesus',
+ j:'Help set up your crib at home, then sing along to this song together.',
+ y:'Help get your home ready for Christmas, then end the day with this song.',
+ video:{j:'WHUpcJmFbQo',y:'aC2LUPJ3dOk'},
+ ask:{j:'Who is your favourite person in the nativity scene, and why?',y:'Christmas is two days away. What do you still need to get ready — inside, not outside?'}},
+{kind:'prayer',icon:'🕊',title:'Saying sorry',
+ j:'Before Jesus comes, let us make our hearts clean. Say sorry to anyone you have hurt, and pray this prayer quietly.',
+ y:'Think honestly about anyone you have hurt recently. Make it right if you can, then pray this prayer.',
+ prayer:'O my God, I am sorry for the wrong things I have done. Help me to be good and to love others as You love me. Amen.'},
+{kind:'bible',icon:'🌟',title:'Christmas Eve',ref:'Luke 2:15–20',
+ j:'Read Luke 2:15–20 together, then gather around your crib and pray for your family. Tonight, read all 24 of your secret words!',
+ y:'Read Luke 2:15–20. Tonight, put your 24 words together and read the message.',
+ quiz:{q:'After visiting baby Jesus, what did the shepherds do?',o:['Went home quietly','Told everyone and praised God','Stayed in the stable'],a:1},
+ ask:{j:'How will you share the good news of Jesus this Christmas?',y:'Like the shepherds, how will you share the good news this Christmas?'}}
+];
+/* ===================== end of settings ===================== */
+
+const KIND={prayer:{j:'Prayer',y:'Prayer'},bible:{j:'Bible quiz',y:'Scripture'},video:{j:'Sing along',y:'Worship'},action:{j:'Kindness challenge',y:'Challenge'}};
+const DONE_LABEL={prayer:'Amen 🙏 — I prayed it',video:'I watched and sang along 🎵',action:'I did it! ✅'};
+
+let V=null;     // 'junior' | 'youth' (internal names for Juniors / Seniors)
+let got={};     // words unlocked during this visit only — nothing is stored
+const preview=/[?&]preview/.test(location.search);
+const now=new Date(),todayKey=new Date(now.getFullYear(),now.getMonth(),now.getDate()).getTime();
+const dateOf=n=>new Date(YEAR,11,n);
+const isOpen=n=>!LOCK_DAYS||preview||dateOf(n).getTime()<=todayKey;
+const fmt=n=>dateOf(n).toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const k=()=>V==='junior'?'j':'y';
+const pick=v=>v&&typeof v==='object'&&!Array.isArray(v)&&('j' in v||'y' in v)?v[k()]:v;
+
+/* ---- version ---- */
+function setVersion(v){V=v;document.getElementById('chooser').classList.add('hidden');render();}
+function openChooser(){document.getElementById('chooser').classList.remove('hidden');}
+
+const LOGO_SWITCH_SECONDS = 2;   // how long each header logo shows before switching
+const todayText=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+function heroHTML(){return `<div class="heroin"><div>
+ <div class="org">Cherupushpa Mission League</div>
+ <div class="org2">Catholic Syro Malabar Eparchy of Great Britain</div>
+ <h1><span class="a">My Journey To Bethlehem </span> 2026</h1>
+ <div class="sub">24 Days of Faith, Love and Kindness</div><div class="rule"></div>
+ <div class="meta"><span class="today">Today: ${todayText}</span><button class="switch" onclick="openChooser()">${V==='junior'?'Juniors · Year 5–7':'Seniors · Year 8+'} · switch</button></div>
+</div><div class="hlogo" id="hlogo"><img src="left.png" alt="" class="on" onerror="logoFail(this)"><img src="right.png" alt="" onerror="logoFail(this)"></div></div>`;}
+function logoFail(img){img.dataset.bad=1;img.classList.remove('on');const ok=[...document.querySelectorAll('#hlogo img')].filter(i=>!i.dataset.bad);if(!ok.length)document.getElementById('hlogo').style.display='none';else ok[0].classList.add('on');}
+setInterval(()=>{const imgs=[...document.querySelectorAll('#hlogo img')].filter(i=>!i.dataset.bad);if(imgs.length<2)return;const k=imgs.findIndex(i=>i.classList.contains('on'));imgs.forEach(i=>i.classList.remove('on'));imgs[(k+1)%imgs.length].classList.add('on');},LOGO_SWITCH_SECONDS*1000);
+
+const HOWTO={
+junior:['Click this button to download your tracker sheet, then print it: <a class="btn gold sm" href="cml-advent-tracker-2026.pdf" download>⬇ Download tracker (PDF)</a>','Each day, tap that day’s door on the calendar.','Do the activity, then pass the quiz or tap the button to finish the challenge.','A <b>secret word</b> appears — write it in the box with the same day number on your sheet.','On 24 December, copy all 24 words in order to read your secret message, then give your sheet to your teacher.'],
+youth:['Click this button to download the tracker sheet (2 pages), then print it: <a class="btn gold sm" href="cml-advent-tracker-2026.pdf" download>⬇ Download tracker (PDF)</a>','Each day, open that day’s door for a reading, prayer, song or challenge.','Complete it to unlock that day’s <b>secret word</b>.','Write the word in the matching day box on <b>page 1</b>. Write your reflection in the matching day space on <b>page 2</b>.','On 24 December, read your 24 words in order, then hand your sheet to your teacher.']};
+
+function render(){
+ document.body.className=V;
+ document.getElementById('hero').innerHTML=heroHTML();
+ document.getElementById('howto').innerHTML=HOWTO[V].map(t=>`<li>${t}</li>`).join('');
+ drawGrid();
+}
+function drawGrid(){
+ const g=document.getElementById('days');g.innerHTML='';
+ DAYS.forEach((d,i)=>{const n=i+1,open=isOpen(n);
+  const b=document.createElement('button');b.className='day'+(open?'':' locked');b.setAttribute('aria-label',fmt(n)+(got[n]?' (done)':''));
+  const dt=dateOf(n);b.innerHTML=`<span class="md"><span class="mo">Dec</span><span class="n">${n}</span></span><span class="wd">${dt.toLocaleDateString('en-GB',{weekday:'short'})}</span><span class="ic">${open?d.icon:'🔒'}</span>${got[n]?'<span class="done">✓</span>':''}`;
+  b.onclick=()=>{b.classList.add('opening');setTimeout(()=>{b.classList.remove('opening');openDay(n)},open?380:0)};
+  g.appendChild(b);});
+}
+/* ---- day window ---- */
+let cur=1;
+function openDay(n){cur=n;const d=DAYS[n-1],K=k();
+ document.getElementById('mTag').textContent='Day '+n+' · '+fmt(n);
+ const body=document.getElementById('mBody');
+ if(!isOpen(n)){document.getElementById('mTitle').textContent='Not yet!';
+  body.innerHTML=`<p class="center" style="font-size:44px;margin:0">🔒</p><p class="center">This door opens on <b>${fmt(n)}</b>.</p>`;show();return;}
+ document.getElementById('mTitle').textContent=d.title;
+ let h=`<span class="kind">${KIND[d.kind][K]}</span><p>${esc(d[K])}</p>`;
+ if(d.ref)h+=`<div class="verse">📖 Read: <b>${esc(d.ref)}</b></div>`;
+ if(d.prayer)h+=`<div class="prayer">${esc(d.prayer)}</div>`;
+ if(d.video){const id=pick(d.video);if(id)h+=`<div class="video"><iframe src="https://www.youtube.com/embed/${encodeURIComponent(id)}?rel=0&playsinline=1${/^https?:/.test(location.origin)?'&origin='+encodeURIComponent(location.origin):''}" title="${esc(d.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="vlink">Video not playing? <a href="https://www.youtube.com/watch?v=${encodeURIComponent(id)}" target="_blank" rel="noopener">Watch it on YouTube</a></div>`;}
+ const ask=d.ask&&d.ask[K];if(ask)h+=`<div class="ask"><b>${K==='j'?'💬 Talk about it:':'Think about it:'}</b> ${esc(ask)}</div>`;
+ if(K==='y')h+=`<p class="note" style="font-size:13px">✍ Write a line or two about this in the <b>Day ${n}</b> space on <b>page 2</b> of your tracker sheet (Seniors reflections page).</p>`;
+ /* challenge */
+ h+=`<div class="challenge">`;
+ if(got[n]){h+=`<p class="note center">You already unlocked this word ✓</p>`;}
+ else if(d.quiz){h+=`<h3>${K==='j'?'🧩 Quiz time! Get it right to unlock your word':'Answer to unlock today’s word'}</h3><p style="margin:0 0 4px">${esc(d.quiz.q)}</p><div class="opts">${d.quiz.o.map((o,i)=>`<button class="opt" data-i="${i}">${esc(o)}</button>`).join('')}</div><div class="fb" id="fb"></div>`;}
+ else{h+=`<h3>${K==='j'?'Finished the activity?':'Done it?'}</h3><button class="btn" id="doneBtn">${DONE_LABEL[d.kind]}</button>`;}
+ h+=`<div class="word${got[n]?' show':''}" id="word"><span class="note">Your secret word for Day ${n} is</span><span class="w">${esc(WORDS[n-1])}</span><span class="note">Write it in the <b>Day ${n}</b> box on <b>page 1</b> of your tracker sheet.</span></div></div>`;
+ body.innerHTML=h;
+ const done=document.getElementById('doneBtn');if(done)done.onclick=()=>{done.remove();unlock(n)};
+ body.querySelectorAll('.opt').forEach(btn=>btn.onclick=()=>{
+  const fb=document.getElementById('fb');
+  if(+btn.dataset.i===d.quiz.a){btn.classList.add('right');body.querySelectorAll('.opt').forEach(o=>o.disabled=true);fb.textContent=K==='j'?'Brilliant! 🎉':'Correct.';unlock(n);}
+  else{btn.classList.remove('wrong');void btn.offsetWidth;btn.classList.add('wrong');fb.textContent=K==='j'?'Not quite — check the reading and try again!':'Not quite — have another look at the passage.';}
+ });
+ show();}
+function unlock(n){got[n]=true;document.getElementById('word').classList.add('show');confetti(n===24?160:60);drawGrid();
+ if(n===24)document.getElementById('word').insertAdjacentHTML('afterend',`<div class="word show" style="margin-top:12px"><span class="note">🎉 That’s all 24! Now read the words on your tracker sheet in order — what is your secret Christmas message?</span></div>`);}
+function show(){const m=document.getElementById('modal');m.classList.add('show');m.scrollTop=0;}
+function closeDay(){document.getElementById('modal').classList.remove('show');document.getElementById('mBody').innerHTML='';}  /* clearing stops any playing video */
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeDay()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDay()});
+
+function confetti(count){const cols=['#ed1a24','#fcf300','#2a3187','#1f7a45','#ffffff','#ed1a24'];
+ for(let i=0;i<count;i++){const s=document.createElement('span');s.className='cf';s.style.left=Math.random()*100+'vw';s.style.background=cols[i%cols.length];s.style.animationDuration=(1.6+Math.random()*1.6)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout(()=>s.remove(),3800);}}
+
+/* ---- start: ?v=juniors / ?v=seniors in the link skips the chooser (handy for two QR codes) ---- */
+const q=(location.search.match(/[?&]v=(junior|youth|seniors|juniors)/)||[])[1];
+V=q?(q.startsWith('junior')?'junior':'youth'):null;
+if(V)render();else{V='junior';render();openChooser();}
+</script>
+</body>
+</html>
